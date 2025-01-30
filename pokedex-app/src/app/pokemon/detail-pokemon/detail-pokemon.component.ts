@@ -6,7 +6,8 @@ import { PokemonService } from '../pokemon.service';
 @Component({
   selector: 'app-detail-pokemon',
   standalone: false,
-  templateUrl: './detail-pokemon.component.html'
+  templateUrl: './detail-pokemon.component.html',
+  styleUrls: ['./detail-pokemon.component.css']
 })
 export class DetailPokemonComponent {
   pokemonList : Pokemon[];
@@ -27,5 +28,9 @@ export class DetailPokemonComponent {
 
   goBack(): void {
     this.router.navigate(['/pokemons']);
+  }
+
+  editPokemon(): void {
+    this.router.navigate(['/edit/pokemon', this.pokemon?.id]);
   }
 }
