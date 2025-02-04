@@ -23,13 +23,14 @@ export class PokemonFormComponent implements OnInit {
     // Pokemon Type liste
     const pokemonId: string | null = this.route.snapshot.paramMap.get('id');
     if (pokemonId !== null) {
-      const foundPokemon = this.pokemonService.getPokemonById(+pokemonId);
-      if (foundPokemon) {
-        this.pokemon = foundPokemon;
-      } else {
-        // handle the case when the pokemon is not found
-        console.error(`Pokemon with id ${pokemonId} not found.`);
-      }
+      this.pokemonService.getPokemonById(+pokemonId).subscribe(pokemon => {
+        if (pokemon) {
+          this.pokemon = pokemon;
+        } else {
+          // handle the case when the pokemon is not found
+          console.error(`Pokemon with id ${pokemonId} not found.`);
+        }
+      });
     }
     this.types = this.pokemonService.getPokemonTypes();
   }
