@@ -9,6 +9,28 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
+  /*
+    Requete dynamique
+  */
+ //Service de recherche de pokemons
+  searchPokemons(term: string): Observable<Pokemon[]> {
+    //Optimisation: si la chaine de recherche est vide ou a moins de 02 lettres, on retourne un tableau vide
+    if(term.length <=1){
+      return of([]);
+    }
+
+    return this.http.get<Pokemon[]>(`api/pokemons/?name=${term}`).pipe(
+      tap((response)=> this.log(response)),
+      catchError((error)=> {
+        console.log(error);
+        return of([]);
+      })
+    )
+  }
+
+  /*
+    Requête one-shot
+  */
   getPokemons(): Observable<Pokemon[]> {
     return this.http.get<Pokemon[]>('api/pokemons').pipe(
       tap((response)=> this.log(response)),
