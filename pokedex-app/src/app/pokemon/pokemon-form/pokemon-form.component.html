@@ -17,6 +17,23 @@
                   Le nom du pokémon est requis (1-25).
             </div>
           </div>
+
+          <!-- 
+          Pokemon picture
+          Ajouter une image pour un pokemon via son lien
+          -->
+          <div *ngIf="isAddForm" class="form-group">
+            <label for="image">Picture</label>
+            <input type="url" class="form-control" id="picture"
+                    required
+                   [(ngModel)]="pokemon.picture" name="image"
+                   #image="ngModel">
+    
+            <div [hidden]="image.valid || image.pristine"
+                  class="card-panel red accent-1">
+                  L'image du pokémon est requise.
+            </div>
+          </div>
     
           <!-- Pokemon hp -->
           <div class="form-group">

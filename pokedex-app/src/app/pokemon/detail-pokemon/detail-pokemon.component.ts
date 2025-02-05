@@ -23,8 +23,13 @@ export class DetailPokemonComponent {
     const pokemonId : string|null = this.route.snapshot.paramMap.get('id'); 
     if(pokemonId){
       this.pokemonService.getPokemonById(+pokemonId)
-       .subscribe(pokemon => this.pokemon = pokemon);
+       .subscribe(poke => this.pokemon = poke);
     }
+  }
+
+  deletePokemon(pokemon:Pokemon) {
+    this.pokemonService.deletePokemonById(pokemon)
+      .subscribe(() => this.goBack());
   }
 
   goBack(): void {

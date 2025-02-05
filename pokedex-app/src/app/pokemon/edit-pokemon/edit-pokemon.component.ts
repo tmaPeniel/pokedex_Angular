@@ -28,7 +28,7 @@ export class EditPokemonComponent {
     const pokemonId : string|null = this.route.snapshot.paramMap.get('id'); 
     if(pokemonId){
       this.pokemonService.getPokemonById(+pokemonId)
-      .subscribe(pokemon => this.pokemon = pokemon);
+      .subscribe(poke => this.pokemon = poke);
     }
   }
 
