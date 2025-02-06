@@ -23,7 +23,6 @@ export class PokemonFormComponent implements OnInit {
   ngOnInit(){
     // Si le formulaire est utilisé pour l'ajout d'un pokemon
     this.isAddForm = this.router.url.includes('add');
-    console.log(this.isAddForm)
     
     // Pokemon Type liste
     this.types = this.pokemonService.getPokemonTypes();
