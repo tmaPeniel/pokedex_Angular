@@ -10,6 +10,7 @@ import { PokemonService } from '../pokemon.service';
 })
 export class ListPokemonComponent implements OnInit {
   pokemons : Pokemon[];
+  pok : any;
   pokemonSelected : Pokemon | undefined;
   
   constructor(
@@ -18,7 +19,8 @@ export class ListPokemonComponent implements OnInit {
   ){}
 
   ngOnInit(){
-     this.pokemons = this.pokemonService.getPokemons();
+     this.pokemonService.getPokemons()
+     .subscribe(poke=> this.pokemons = poke);
   }
   
   goToPokemon(pokemon : Pokemon){

@@ -22,8 +22,14 @@ export class DetailPokemonComponent {
   ngOnInit(){
     const pokemonId : string|null = this.route.snapshot.paramMap.get('id'); 
     if(pokemonId){
-      this.pokemon = this.pokemonService.getPokemonById(+pokemonId);
+      this.pokemonService.getPokemonById(+pokemonId)
+       .subscribe(poke => this.pokemon = poke);
     }
+  }
+
+  deletePokemon(pokemon:Pokemon) {
+    this.pokemonService.deletePokemonById(pokemon)
+      .subscribe(() => this.goBack());
   }
 
   goBack(): void {

@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PokemonFormComponent implements OnInit {
   @Input() pokemon : Pokemon;
   types :  string[];
+  isAddForm : boolean;
 
   constructor(
     private pokemonService : PokemonService,
@@ -20,18 +21,13 @@ export class PokemonFormComponent implements OnInit {
   ){}
 
   ngOnInit(){
+    // Si le formulaire est utilisé pour l'ajout d'un pokemon
+    this.isAddForm = this.router.url.includes('add');
+    console.log(this.isAddForm)
+    
     // Pokemon Type liste
-    const pokemonId: string | null = this.route.snapshot.paramMap.get('id');
-    if (pokemonId !== null) {
-      const foundPokemon = this.pokemonService.getPokemonById(+pokemonId);
-      if (foundPokemon) {
-        this.pokemon = foundPokemon;
-      } else {
-        // handle the case when the pokemon is not found
-        console.error(`Pokemon with id ${pokemonId} not found.`);
-      }
-    }
     this.types = this.pokemonService.getPokemonTypes();
+    
   }
 
   hasType(type: string): boolean{
@@ -59,7 +55,17 @@ export class PokemonFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("Submit form !");
-    this.router.navigate(['/pokemon', this.pokemon.id]);
+
+    // Si le formulaire est utilisé pour l'ajout d'un pokemon
+    if(this.isAddForm){
+      this.pokemonService.addPokemon(this.pokemon)
+      .subscribe((pokemon)=> this.router.navigate(['/pokemon', pokemon.id]));
+    } 
+    // Si le formulaire est utilisé pour la modification d'un pokemon
+    else{
+    this.pokemonService.updatePokemon(this.pokemon)
+      .subscribe(()=> this.router.navigate(['/pokemon', this.pokemon.id]));
+    }
+    
   }
 }
