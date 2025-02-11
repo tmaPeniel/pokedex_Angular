@@ -4,5 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: false
+  
 })
 export class AppComponent { }
