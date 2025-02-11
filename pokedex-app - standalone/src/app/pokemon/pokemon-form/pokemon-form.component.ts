@@ -2,12 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LoadPokemonComponent } from '../load-pokemon/load-pokemon.component';
+import { PokemonTypeColorPipe } from '../pokemon-type-color.pipe';
 
 @Component({
-  selector: 'app-pokemon-form',
-  standalone: false,
-  templateUrl: './pokemon-form.component.html',
-  styleUrls: ['./pokemon-form.component.css']
+    selector: 'app-pokemon-form',
+    templateUrl: './pokemon-form.component.html',
+    styleUrls: ['./pokemon-form.component.css'],
+    imports: [NgIf, FormsModule, NgFor, LoadPokemonComponent, PokemonTypeColorPipe]
 })
 export class PokemonFormComponent implements OnInit {
   @Input() pokemon : Pokemon;

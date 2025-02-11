@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-login',
-  standalone: false,
-  
-  templateUrl: './login.component.html'
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    imports: [FormsModule, NgIf]
 })
 export class LoginComponent implements OnInit {
   message: string= "Vous êtes déconnecté. (admin/admin)";

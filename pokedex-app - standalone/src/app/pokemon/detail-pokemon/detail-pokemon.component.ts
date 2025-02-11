@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
+import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { LoadPokemonComponent } from '../load-pokemon/load-pokemon.component';
+import { PokemonTypeColorPipe } from '../pokemon-type-color.pipe';
 
 @Component({
-  selector: 'app-detail-pokemon',
-  standalone: false,
-  templateUrl: './detail-pokemon.component.html',
-  styleUrls: ['./detail-pokemon.component.css']
+    selector: 'app-detail-pokemon',
+    templateUrl: './detail-pokemon.component.html',
+    styleUrls: ['./detail-pokemon.component.css'],
+    imports: [NgIf, NgFor, LoadPokemonComponent, DatePipe, PokemonTypeColorPipe]
 })
 export class DetailPokemonComponent {
   pokemonList : Pokemon[];
