@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { Pokemon } from '../pokemon';
 import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 import { PokemonService } from '../pokemon.service';
+import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-search-pokemon',
-  standalone: false,
-  templateUrl: './search-pokemon.component.html'
+    selector: 'app-search-pokemon',
+    templateUrl: './search-pokemon.component.html',
+    imports: [NgFor, AsyncPipe]
 })
 export class SearchPokemonComponent implements OnInit {
   searchTerm = new Subject<string>(); //searchTerm: stocke les recherches successif de l'utilateur dans le temps, sous forme de chaine de caractères 

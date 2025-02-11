@@ -1,9 +1,6 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
-@Directive({
-  selector: '[pkmBorderCard]',
-  standalone: false
-})
+@Directive({ selector: '[pkmBorderCard]' })
 export class BorderCardDirective {
 
   private initialColor : string = '#f5f5f5';
