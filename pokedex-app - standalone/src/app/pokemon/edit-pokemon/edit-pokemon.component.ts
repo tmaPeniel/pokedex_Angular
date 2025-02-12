@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../pokemon.service';
 import { NgIf } from '@angular/common';
 import { PokemonFormComponent } from '../pokemon-form/pokemon-form.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-edit-pokemon',
@@ -19,18 +20,32 @@ import { PokemonFormComponent } from '../pokemon-form/pokemon-form.component';
 })
 export class EditPokemonComponent {
   pokemon : Pokemon | undefined;
+  
 
   constructor(
     private route : ActivatedRoute,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private title : Title
   ){}
 
   ngOnInit(){
     const pokemonId : string|null = this.route.snapshot.paramMap.get('id'); 
     if(pokemonId){
       this.pokemonService.getPokemonById(+pokemonId)
-      .subscribe(poke => this.pokemon = poke);
+      .subscribe(poke =>{
+        this.pokemon = poke;
+        this.initTitle(poke);
+      } );
     }
+  }
+
+  initTitle(pokemon: Pokemon | undefined){
+    if(!pokemon){
+      this.title.setTitle("Pokemon not found");
+      return;
+    }
+
+    this.title.setTitle(`Edit ${pokemon.name}`);
   }
 
 }
